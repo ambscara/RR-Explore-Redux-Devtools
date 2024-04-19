@@ -1,16 +1,22 @@
-import React, {useState} from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment, incrementByAmount } from './features/counterSlice'
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { decrement, increment, incrementByAmount } from './features/counterSlice';
+import { addTodo } from './todoSlice';
+import TodoForm from './TodoForm';
 
 function Counter() {
-    const count = useSelector((state) => state.counter.value)
-    const dispatch = useDispatch()
-    const [input, setInput] = useState(0)
+    const count = useSelector((state) => state.counter.value);
+    const dispatch = useDispatch();
+    const [input, setInput] = useState(0);
 
     const byAmount = (e) => {
-        e.preventDefault()
-        dispatch(incrementByAmount(Number(input)))
-    }
+        e.preventDefault();
+        dispatch(incrementByAmount(Number(input)));
+    };
+
+    const handleAddTodo = (text) => { 
+        dispatch(addTodo({ text }));
+    };
 
     return (
         <div>
@@ -25,12 +31,13 @@ function Counter() {
                 onClick={() => dispatch(decrement())}>
                 Decrement
             </button>
+            <TodoForm onAddTodo={handleAddTodo} /> {/* Render TodoForm component */}
             <form onSubmit={(e) => byAmount(e)}>
                 <input type="number" onChange={(e) => setInput(e.target.value)} />
                 <button type="submit">Submit</button>
             </form>
         </div>
-    )
+    );
 }
 
-export default Counter
+export default Counter;
