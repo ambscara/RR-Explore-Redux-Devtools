@@ -31,7 +31,7 @@ function Counter() {
                 onClick={() => dispatch(decrement())}>
                 Decrement
             </button>
-            <TodoForm onAddTodo={handleAddTodo} /> {/* Render TodoForm component */}
+            <TodoForm onAddTodo={handleAddTodo} /> {/* Pass handleAddTodo function to TodoForm */}
             <form onSubmit={(e) => byAmount(e)}>
                 <input type="number" onChange={(e) => setInput(e.target.value)} />
                 <button type="submit">Submit</button>
